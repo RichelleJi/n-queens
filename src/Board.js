@@ -62,8 +62,8 @@
     },
 
 
-  /*
-         _             _     _
+    /*
+          _             _     _
      ___| |_ __ _ _ __| |_  | |__   ___ _ __ ___ _
     / __| __/ _` | '__| __| | '_ \ / _ \ '__/ _ (_)
     \__ \ || (_| | |  | |_  | | | |  __/ | |  __/_
@@ -147,30 +147,63 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      return false; // fixme
+      var hasConflict = false;
+      var spacesOccupied = 0;
+      for (var i = 0; i < this.rows().length; i++) {
+        var columnValue = this.rows()[i][colIndex];
+        if (columnValue === 1) {
+          spacesOccupied++;
+        }
+      }
+        if (spacesOccupied > 1) {
+          hasConflict = true;
+        }
+      return hasConflict; // fixme
     },
     /*
     i: number representing the index of the column to check 
-    o: boolean representing
+    o: boolean representing if the column has multiple spaces occupied
     c: index must be between 0 and n-1
-    e: number
+    e: none
     
-    this function should:
-    relationship between inputs and outputs:
-    */
-
+    this function should: return true given a column that has more than one space occupied
+    relationship between inputs and outputs: if input column has multiple spaces occupied, it returns true
+    
+    create var hasColConflict = false
+    create var spacesOccupied = 0
+    iterate through the column 
+      if column has a one space occupied
+        spacesOcc ++
+      if spacesOcc > 1
+        hasColFonflict = true
+    return hasColConflict
+*/
+    
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      return false; // fixme
+      var hasConflict = false;
+      for (var i = 0; i < this.rows().length; i++) {
+        if (this.hasColConflictAt(i) === true) {
+          hasConflict = true;
+        }
+      }
+      return hasConflict; // fixme
     },
+
     /*
     i: none
-    o: boolean representing
+    o: boolean representing if the board has any columns with more than space occupied
     c: none
     e: none
     
-    this function should:
-    relationship between inputs and outputs:
+    this function should: check the whole board to see if multi spaces occ per column
+    relationship between inputs and outputs: returns true if any column has multiple spaces occ
+
+    declare a variable called hasConflict = false
+    iterate through each row (board.rows, which will return the entire table)
+      if row has conflict using hasRowConflictAt with the argument columnNumber 
+        set hasConflict to true
+    return hasConflict  
     */
 
 
