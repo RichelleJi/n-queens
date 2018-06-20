@@ -62,7 +62,7 @@
     },
 
 
-/*
+  /*
          _             _     _
      ___| |_ __ _ _ __| |_  | |__   ___ _ __ ___ _
     / __| __/ _` | '__| __| | '_ \ / _ \ '__/ _ (_)
@@ -78,15 +78,68 @@
     // --------------------------------------------------------------
     //
     // test if a specific row on this board contains a conflict
+    //rowIndex is not an integer; it is an entire row
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+      var spacesOccupied = 0;
+      var hasConflict = false;
+      for (var i = 0; i < rowIndex.length; i++) {
+        if (rowIndex[i] === 1) {
+          spacesOccupied++;
+        }
+      }
+      if (spacesOccupied > 1) {
+        hasConflict = true;
+      }      
+      return hasConflict; // fixme
     },
+
+    /*
+    i: number (index) representing a row to check
+    o: boolean representing if that row has multiple spaces occupied
+    c: index must be between 0 and n-1 
+    e: none 
+    
+    this function should: take a row to check and return true if the row has more than one space occupied
+    relationship between inputs and outputs: the index of a row and the boolean of whether the row has 1+ spaces occupied
+    
+
+    initialize counter var spacesOccupied = 0
+    initialize hasConflict = false
+    iterate through the row
+      if the element is equal to 1
+         spacesOccupied++
+    if spacesOccupied > 1
+      hasConflict = true
+    return hasConflict
+  
+    */
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+      var hasConflict = false;
+      for (var i = 0; i < this.rows().length; i++) {
+        if (this.hasRowConflictAt(this.rows()[i]) === true) {
+          hasConflict = true;
+        }
+      }
+      return hasConflict; // fixme
     },
+    
+    /*
+    i: none 
+    o: boolean representing if the entire board has any row conflict
+    c: none
+    e: none
+    
+    this function should: check a board if any row has more than one space occupied
+    relationship between inputs and outputs: provided with a board, return true if more than space in a row is occupied
 
+    declare a variable called hasConflict = false
+    iterate through each row (board.rows, which will return the entire table)
+      if row has conflict using hasRowConflictAt with the argument rowNumber 
+        set hasConflict to true
+    return hasConflict  
+    */
 
 
     // COLUMNS - run from top to bottom
@@ -96,12 +149,29 @@
     hasColConflictAt: function(colIndex) {
       return false; // fixme
     },
+    /*
+    i: number representing the index of the column to check 
+    o: boolean representing
+    c: index must be between 0 and n-1
+    e: number
+    
+    this function should:
+    relationship between inputs and outputs:
+    */
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
       return false; // fixme
     },
-
+    /*
+    i: none
+    o: boolean representing
+    c: none
+    e: none
+    
+    this function should:
+    relationship between inputs and outputs:
+    */
 
 
     // Major Diagonals - go from top-left to bottom-right
@@ -111,12 +181,29 @@
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
       return false; // fixme
     },
+    /*
+    i: number representing 
+    o: boolean representing
+    c: none
+    e: none
+    
+    this function should:
+    relationship between inputs and outputs:
+    */
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
       return false; // fixme
     },
-
+    /*
+    i:
+    o:
+    c:
+    e:
+    
+    this function should:
+    relationship between inputs and outputs:
+    */
 
 
     // Minor Diagonals - go from top-right to bottom-left
@@ -126,12 +213,29 @@
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
       return false; // fixme
     },
+    /*
+    i:
+    o:
+    c:
+    e:
+    
+    this function should:
+    relationship between inputs and outputs:
+    */
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
       return false; // fixme
     }
-
+    /*
+    i:
+    o:
+    c:
+    e:
+    
+    this function should:
+    relationship between inputs and outputs:
+    */
     /*--------------------  End of Helper Functions  ---------------------*/
 
 
