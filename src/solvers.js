@@ -21,11 +21,14 @@ window.findNRooksSolution = function(n) {
   var board = new Board({'n': n});
   // console.log('board instantiated', board)
   if (n === 0) {
-    return board.rows(); 
+    //return board.rows(); 
+    return board;
   }
   var innerRecursive = function(currentBoard) {
     if (rooksOnBoard === n) {
-      return board.rows(); 
+      // return board.rows(); 
+      console.log('this is what is returned by inner', board.rows());
+      return board.rows();
     } else {
       for (var row = 0; row < n; row++) {
         for (var column = 0; column < n; column++) {
@@ -34,19 +37,20 @@ window.findNRooksSolution = function(n) {
             // console.log('currentboard', board)
             rooksOnBoard++;
             if (board.hasAnyRowConflicts() === false && board.hasAnyColConflicts() === false) {
-              innerRecursive(board);
+              return innerRecursive(board);
             } else {
               board.togglePiece(row, column);
+              rooksOnBoard--;
             }
           }
         }
       }
     }
   };
-  // debugger;
-  return innerRecursive(board);
-  // console.log('Single solution for ' + n + ' rooks:', JSON.stringify(innerRecursive(board)));
-  
+
+  innerRecursive(board);
+  console.log('this is whats returned by findNRooks', board.rows());
+  return board.rows();
 };
 
 /*
@@ -81,8 +85,10 @@ if array()
 
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
 window.countNRooksSolutions = function(n) {
-  var solutionCount = undefined; //fixme
-
+  var solutionCount = 0; //fixme
+  if (this.findNRooksSolution(n) !== undefined) {
+    solutionCount++;
+  }
   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
   return solutionCount;
 };
