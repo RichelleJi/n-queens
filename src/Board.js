@@ -270,10 +270,15 @@
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
       var eIndex = minorDiagonalColumnIndexAtFirstRow;//declare result array for all elements digonal columns;
       var result = [];
-      for (var i = eIndex; i >= 0; i--) {//iterate through the row, and elemnts by adding 1 to both coordinates 
-        eIndex = 0;
+      var len = this.rows().length - 1;
+      var iLimit = minorDiagonalColumnIndexAtFirstRow > len? len:minorDiagonalColumnIndexAtFirstRow;
+      for (var i = 0; i <= iLimit; i++) {//iterate through the row, and elemnts by adding 1 to both coordinates 
+        if (eIndex > len) {
+          eIndex = len;
+          i = minorDiagonalColumnIndexAtFirstRow - len;
+        }
         result.push(this.rows()[i][eIndex]);//add to the result array and iterate
-        eIndex++;
+        eIndex--;
       } 
       //if the eIndex is larger tahn bound of array (length-)
       return this.hasRowConflictAt(result);
@@ -290,6 +295,15 @@
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
+      var hasConflict = false;
+      var len = this.rows().length - 1;
+      // var eIndexStart  = thi s.rows().length - 1; 
+      for (var i = 0; i <= len * 2; i++) {
+        if (this.hasMinorDiagonalConflictAt(i) === true) {
+          hasConflict = true;
+        }
+      }
+      return hasConflict;
       return false; // fixme
     }
     /*
