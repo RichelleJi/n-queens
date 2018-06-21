@@ -212,7 +212,18 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      var eIndex= majorDiagonalColumnIndexAtFirstRow;//declare result array for all elements digonal columns;
+      var result = [];
+      for (var i = 0; i < this.rows().length ; i++) {//iterate through the row, and elemnts by adding 1 to both coordinates
+        //is the index negative?
+        if(eIndex < 0){ //yes -- make absoluate and swap the coordinates
+          i = Math.abs(eIndex); //reset the starting point of the the iteration
+          eIndex = 0;
+        }
+        result.push(this.rows()[i][eIndex]);//add to the result array and iterate
+        eIndex++;
+      }
+      return this.hasRowConflictAt(result);
     },
     /*
     i: number representing 
@@ -220,22 +231,35 @@
     c: none
     e: none
     
-    this function should:
-    relationship between inputs and outputs:
+    this function should: 
+    relationship between inputs and outputs: 
     */
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
+      var hasConflict = false;
+      var eIndexStart  = this.rows().length - 1; 
+      for (var i = (-eIndexStart); i <= eIndexStart; i++) {
+        if (this.hasMajorDiagonalConflictAt(i) === true) {
+          hasConflict = true;
+        }
+      }
+      return hasConflict; 
+       //declare boolean variable to false
+      //iterate through MajorDiagonals starting from negative eIndex to positive eIndex
+          //check if any of MajorDiagonals have conflicts
+              //if so set boolean var to true
+          
+      //return boolean variable 
     },
     /*
-    i:
-    o:
-    c:
-    e:
+    i: none
+    o: boolean
+    c: none 
+    e: none
     
-    this function should:
-    relationship between inputs and outputs:
+    this function should:iterate through all major diagonals, to check if any of them has conflicts
+    relationship between inputs and outputs: check if there's any major diagonal conflicts, return boolean results
     */
 
 
