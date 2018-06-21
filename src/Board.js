@@ -268,7 +268,15 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      var eIndex = minorDiagonalColumnIndexAtFirstRow;//declare result array for all elements digonal columns;
+      var result = [];
+      for (var i = eIndex; i >= 0; i--) {//iterate through the row, and elemnts by adding 1 to both coordinates 
+        eIndex = 0;
+        result.push(this.rows()[i][eIndex]);//add to the result array and iterate
+        eIndex++;
+      } 
+      //if the eIndex is larger tahn bound of array (length-)
+      return this.hasRowConflictAt(result);
     },
     /*
     i:
